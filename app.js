@@ -15,9 +15,11 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+var posts=[];
 app.get("/", function(req,res){
-  res.render("home" , {startingcontent:homeStartingContent});//passing javascript object The key is going to be the variable that you'll be able to tap into inside your home.ejs and the value is whatever it is that you want to pass over that comes from this current page which is the app.js.
+  res.render("home" , {startingcontent: homeStartingContent, posts: posts});//passing javascript object The key is going to be the variable that you'll be able to tap into inside your home.ejs and the value is whatever it is that you want to pass over that comes from this current page which is the app.js.
 //instead of just rendering home page on browsers get request, we are also proving text which is the value present in key in javascript object
+
 });
 
 app.get("/about", function(req,res){
@@ -30,7 +32,17 @@ app.get("/contact", function(req,res){
 });
 
 
-
+app.get("/compose", function(req,res){
+  res.render("compose");
+});
+app.post("/compose",function(req,res){
+  const post = {
+    title: req.body.postTitle,
+    content: req.body.postBody
+  };
+  posts.push(post);
+  res.redirect("/");//making get request to root route
+});
 
 
 
