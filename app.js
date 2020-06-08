@@ -16,9 +16,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/", function(req,res){
-  res.render("home" , {Para:homeStartingContent});//passing javascript object The key is going to be the variable that you'll be able to tap into inside your home.ejs and the value is whatever it is that you want to pass over that comes from this current page which is the app.js.
+  res.render("home" , {startingcontent:homeStartingContent});//passing javascript object The key is going to be the variable that you'll be able to tap into inside your home.ejs and the value is whatever it is that you want to pass over that comes from this current page which is the app.js.
 //instead of just rendering home page on browsers get request, we are also proving text which is the value present in key in javascript object
 });
+
+app.get("/about", function(req,res){
+  res.render("about" , {aboutcontent:aboutContent});
+});
+
+
+app.get("/contact", function(req,res){
+  res.render("contact" , {contactcontent:contactContent});
+});
+
 
 
 
